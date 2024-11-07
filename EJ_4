@@ -1,0 +1,120 @@
+//4. Realizar captura de tiempos para cada uno de los algoritmos de ordenamiento para:
+//  a. 100 elementos.
+//  b. 1000 elementos.
+//  c. 10000 elementos.
+package Ordenamiento;
+import java.util.Arrays;
+import java.util.Random;
+
+public class EJ4 {
+    public static void main(String[] args) {
+        //Definimos elos tamaños de los array que ordenaremos
+        int[] sizes = {100, 1000, 10000};
+        // Iteramos sobre cada tamaño de arreglo
+        for (int size : sizes) {
+            // Generamos un arreglo de números aleatorios del tamaño actual
+            int[] array = random(size);
+
+            System.out.println("\n***TIEMPO PARA " + size+" ELEMENTOS***\n");
+            
+
+            //Shellsort
+            //Creamos una copia del arreglo original para ordenar con Shellsort
+            int[] shellsortArray = Arrays.copyOf(array, array.length);
+            long start = System.nanoTime(); // Capturamos el tiempo de inicio
+            shellsort(shellsortArray);      // Ordenamos con Shellsort
+            long end = System.nanoTime();   // Capturamos el tiempo de fin
+            // Imprimimos el tiempo en milisegundos (ms)
+            System.out.println("Shellsort: " + (end - start) / 1e6 + " ms");
+
+            // Insertion Sort
+            // Creamos una copia del arreglo original para ordenar con Insertion Sort
+            int[] insertionArray = Arrays.copyOf(array, array.length);
+            start = System.nanoTime(); // Capturamos el tiempo de inicio
+            insertionSort(insertionArray);  // Ordenamos con Insertion Sort
+            end = System.nanoTime();        // Capturamos el tiempo de fin
+            // Imprimimos el tiempo en milisegundos (ms)
+            System.out.println("Insertion Sort: " + (end - start) / 1e6 + " ms");
+
+            // Quicksort
+            // Creamos una copia del arreglo original para ordenar con Quicksort
+            int[] quicksortArray = Arrays.copyOf(array, array.length);
+            start = System.nanoTime(); // Capturamos el tiempo de inicio
+            quicksort(quicksortArray, 0, quicksortArray.length - 1); // Ordenamos con Quicksort
+            end = System.nanoTime();   // Capturamos el tiempo de fin
+            // Imprimimos el tiempo en milisegundos (ms)
+            System.out.println("Quicksort: " + (end - start) / 1e6 + " ms");
+
+            System.out.println(); // Espacio entre resultados de diferentes tamaños
+            System.out.println("_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _");
+        }
+    }
+
+    // Método para generar un arreglo de números aleatorios de un tamaño dado
+    public static int[] random(int size) {
+        Random random = new Random();
+        int[] array = new int[size];
+        // Llenamos el arreglo con números aleatorios entre 0 y 9999
+        for (int i = 0; i < size; i++) {
+            array[i] = random.nextInt(10000);
+        }
+        return array;
+    }
+
+    // Implementación del algoritmo Shellsort
+    public static void shellsort(int[] array) {
+        int n = array.length;
+        int gap, i, j, temp;
+        // Disminuimos el "gap" (separación entre elementos) de forma progresiva
+        for (gap = n / 2; gap > 0; gap /= 2) {
+            // A partir del "gap", realizamos una especie de Insertion Sort
+            for (i = gap; i < n; i++) {
+                for (j = i - gap; j >= 0 && array[j] > array[j + gap]; j -= gap) {
+                    // Intercambiamos si los elementos están fuera de orden
+                    temp = array[j];
+                    array[j] = array[j + gap];
+                    array[j + gap] = temp;
+                }
+            }
+        }
+    }
+
+    // Implementación del algoritmo Insertion Sort
+    public static void insertionSort(int[] array) {
+        int n = array.length;
+        // Iteramos sobre cada elemento, comenzando en la segunda posición
+        for (int p = 1; p < n; p++) {
+            int temp = array[p];
+            int j = p;
+            // Movemos los elementos mayores hacia la derecha
+            while (j > 0 && temp < array[j - 1]) {
+                array[j] = array[j - 1];
+                j--;
+            }
+            // Insertamos el elemento en su posición correcta
+            array[j] = temp;
+        }
+    }
+
+    // Implementación del algoritmo Quicksort
+    public static void quicksort(int[] array, int left, int right) {
+        if (left >= right) return; // Caso base: si el subarreglo tiene un elemento o está vacío
+
+        int i = left;
+        int j = right;
+        int pivot = array[(left + right) / 2]; // Seleccionamos el pivote (el elemento medio)
+
+        // Dividimos el arreglo en dos subarreglos
+        while (i <= j) {
+            while (array[i] < pivot) i++; // Encontramos un valor mayor o igual al pivote desde la izquierda
+            while (array[j] > pivot) j--; // Encontramos un valor menor o igual al pivote desde la derecha
+            if (i <= j) { // Intercambiamos si los elementos están fuera de lugar
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+                i++;
+                j--;
+            }
+        }
+    }
+}
