@@ -1,0 +1,27 @@
+//3. Implementar que reciba la longitud de array y retorne un array cargado de números aleatorios.
+package Ordenamiento;
+import java.util.Random;
+
+public class EJ3 {
+    
+    public static void main(String[] args) {
+        int tam = 10; //Definimos el tamaño del array
+        int [] array = random(tam);; //Inicializamos el array
+        
+        System.out.println("\n\n***ARRAY ALEATORIO***\n"); //Imprime el array aletorio que generó la funcion "random"
+        for (int i = 0; i < array.length; i++) {
+            System.out.print("\t"+array[i]);
+        }
+        System.out.println("\n\n");
+    }
+
+    public static int[] random (int tam){
+        Random random = new Random(); 
+        int []array = new int [tam]; //Inicializamos el array con su longitud
+
+        for (int i = 0; i < 10; i++){
+            array [i] = random.nextInt(100); //Se generaran números random entre 0 y 99
+        }
+        return array;
+    }
+}
