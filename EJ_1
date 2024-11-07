@@ -1,0 +1,243 @@
+//1. Implemente los métodos de ordenación de inserción, Shellsort y quicksort usando
+//las implementaciones del teórico. Ejecútelos con los siguientes objetos:
+//  a. enteros.
+//  b. números reales de tipo double.
+//  c. cadena de caracteres.
+
+package Ordenamiento;
+
+public class EJ1 {
+    public static void main(String[] args) {
+        int arrayI [] ={5, 9, 2, 6, 13, 58, 1, 22}; //Se inicializa el arreglo de enteros
+        double arrayD[] = {8.5, 3.4, 2.0, 12.01, 3.56, 9.5, 6.05, 7.0}; //Se inicializa el arreglo de números tipo double
+        char arrayC[]  = {'c', 'f', 'y', 'l', 'b', 'p', 'a'}; //Se inicializa el arreglo de caracteres
+        int left = 0;
+        int rightI = arrayI.length-1;
+
+        shellsort(arrayI, arrayD, arrayC); // Se llama y se imprime la funcion Shellsort
+        System.out.println("\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _");
+        
+        insertionSort(arrayI, arrayD, arrayC); // Se llama y se imprime la funcion Insertion
+        System.out.println("\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _");
+        
+        quicksortInt(arrayI, left, rightI);// Se llama a la funcion QuicksortInt
+        System.out.println("\n\n***QUICKSORT CON ENTEROS*** \n"); 
+        for(int k = 0; k < arrayI.length; k++){//Se imprime la funcion QuicksortInt
+            System.out.print("\t"+arrayI[k]);
+        }
+
+        quicksortDouble(arrayD, left, rightI); // Se llama a la funcion QuicksortDouble
+        System.out.println("\n\n***QUICKSORT CON NÚM TIPO DOUBLE*** \n"); 
+        for(int k = 0; k < arrayD.length; k++){ //Se imprime la funcion QuicksortDouble
+            System.out.print("\t"+arrayD[k]);
+        }
+
+        quicksortDouble(arrayD, left, rightI); // Se llama a la funcion QuicksortChar
+        System.out.println("\n\n***QUICKSORT CON CADENA DE CARACTERES*** \n"); 
+        for(int k = 0; k < arrayC.length; k++){ //Se imprime la funcion QuicksortChar
+            System.out.print("\t"+arrayC[k]);
+        }
+        System.out.println("\n\n");
+
+    }
+
+    public static void shellsort(int []arrayI, double []arrayD, char []arrayC) {
+        
+        //Shellsort a enteros
+        int nI = arrayI.length;
+        int gap, i, j, temp;
+        for (gap = nI /2; gap > 0; gap /= 2){
+            for (i = gap; i < nI; i++){
+                for (j = i-gap; j>= 0 && arrayI[j]>arrayI[j+gap]; j-=gap){
+                    temp = arrayI[j];
+                    arrayI[j] = arrayI[j + gap];
+                    arrayI[j + gap] = temp;
+                }
+            }
+        }
+
+        //Shellsort a núm tipo double
+        int nD = arrayD.length;
+        double tem;
+        for (gap = nD /2; gap > 0; gap /= 2){ //Se reduce el gap en cada iteración
+            for (i = gap; i < nD; i++){
+                for (j = i-gap; j>= 0 && arrayD[j]>arrayD[j+gap]; j-=gap){
+
+                    //Se intercambia si el elemento actual es mayor que el desplazado por gap
+                    tem = arrayD[j];
+                    arrayD[j] = arrayD[j + gap];
+                    arrayD[j + gap] = tem;
+                }
+            }
+        }
+
+        //Shellsort a cadena de caracteres
+        int nC = arrayC.length;
+        char tempo;
+        for (gap = nC /2; gap > 0; gap /= 2){
+            for (i = gap; i < nC; i++){
+                for (j = i-gap; j>= 0 && arrayC[j]>arrayC[j+gap]; j-=gap){
+                    tempo = arrayC[j];
+                    arrayC[j] = arrayC[j + gap];
+                    arrayC[j + gap] = tempo;
+                }
+            }
+        }
+
+        System.out.println("\n***SHELLSORT CON ENTEROS*** \n");
+
+        //Se imprimen los resultados
+
+        for(int k = 0; k < arrayI.length; k++){
+            System.out.print("\t"+arrayI[k]);
+        }
+
+
+        System.out.println("\n\n***SHELLSORT CON NÚM. TIPO DOUBLE*** \n");
+        
+        for(int k = 0; k < arrayD.length; k++){
+            System.out.print("\t"+arrayD[k]);
+        }
+
+        System.out.println("\n\n***SHELLSORT CON CADENA DE CARACTERES*** \n");
+        
+        for(int k = 0; k < arrayC.length; k++){
+            System.out.print("\t"+arrayC[k]);
+        }
+    }
+
+    public static void insertionSort(int[] arrayI, double[] arrayD, char[] arrayC) {
+        
+        //Insertion a enteros
+        int nI = arrayI.length;
+        for (int p = 1; p < nI; p++) {
+            int temp = arrayI[p];
+            int j = p;
+    
+            while (j > 0 && temp < arrayI[j - 1]) {
+                arrayI[j] = arrayI[j - 1];
+                j--;
+            }
+            arrayI[j] = temp;
+        }
+    
+        //Insertion a núm tipo double
+        int nD = arrayD.length;
+        for (int p = 1; p < nD; p++) {  
+            double tem = arrayD[p];
+            int j = p;
+    
+            while (j > 0 && tem < arrayD[j - 1]) {  // Desplaza los elementos mayores hacia adelante
+                arrayD[j] = arrayD[j - 1];
+                j--;
+            }
+            arrayD[j] = tem;
+        }
+    
+
+        //Insertion a cadena de caracteres
+        int nC = arrayC.length;
+        for (int p = 1; p < nC; p++) {  
+            char tempo = arrayC[p];
+            int j = p;
+    
+            while (j > 0 && tempo < arrayC[j - 1]) { 
+                arrayC[j] = arrayC[j - 1];
+                j--;
+            }
+            arrayC[j] = tempo;
+        }
+
+        //Se imprimen los resultados
+    
+        System.out.println("\n\n***INSERTION CON ENTEROS*** \n");
+        for (int k = 0; k < arrayI.length; k++) {
+            System.out.print("\t" + arrayI[k]);
+        }
+    
+        System.out.println("\n\n***INSERTION CON NÚM TIPO DOUBLE*** \n");
+        for (int k = 0; k < arrayD.length; k++) {
+            System.out.print("\t" + arrayD[k]);
+        }
+    
+        System.out.println("\n\n***INSERTION CON CADENA DE CARACTERES*** \n");
+        for (int k = 0; k < arrayC.length; k++) {
+            System.out.print("\t" + arrayC[k]);
+        }
+    }
+    
+    //Funcion Quicksort para enteros
+    public static void quicksortInt(int[] arrayI, int left, int right) {
+        if (left >= right) return;
+
+        int i = left;
+        int j = right;
+        int pivot = arrayI[(left + right) / 2];
+
+        while (i <= j) {
+            while (arrayI[i] < pivot) i++; //Busca un valor mayor que el pivote
+            while (arrayI[j] > pivot) j--; //Busca un valor menor que el pivote
+            if (i <= j) { //Intercambio si están fuera de lugar
+                int temp = arrayI[i];
+                arrayI[i] = arrayI[j];
+                arrayI[j] = temp;
+                i++;
+                j--;
+            }
+        }
+        // Corrección en las llamadas recursivas
+        if (left < j) quicksortInt(arrayI, left, j);
+        if (i < right) quicksortInt(arrayI, i, right);
+        
+    }
+
+    //Funcion Quicksort para núm tipo double
+    public static void quicksortDouble(double[] arrayD, int left, int right) {
+        if (left >= right) return;
+
+        int i = left;
+        int j = right;
+        double pivot = arrayD[(left + right) / 2];
+
+        while (i <= j) {
+            while (arrayD[i] < pivot) i++;
+            while (arrayD[j] > pivot) j--;
+            if (i <= j) {
+                double temp = arrayD[i];
+                arrayD[i] = arrayD[j];
+                arrayD[j] = temp;
+                i++;
+                j--;
+            }
+        }
+        // Corrección en las llamadas recursivas
+        if (left < j) quicksortDouble(arrayD, left, j);
+        if (i < right) quicksortDouble(arrayD, i, right);
+        
+    }
+
+    //Funcion Quicksort para cadena de caracteres
+    public static void quicksortChar(char[] arrayC, int left, int right) {
+        if (left >= right) return;
+
+        int i = left;
+        int j = right;
+        char pivot = arrayC[(left + right) / 2];
+
+        while (i <= j) {
+            while (arrayC[i] < pivot) i++;
+            while (arrayC[j] > pivot) j--;
+            if (i <= j) {
+                char temp = arrayC[i];
+                arrayC[i] = arrayC[j];
+                arrayC[j] = temp;
+                i++;
+                j--;
+            }
+        }
+        // Corrección en las llamadas recursivas
+        if (left < j) quicksortChar(arrayC, left, j);
+        if (i < right) quicksortChar(arrayC, i, right);
+        
+    }
+}
