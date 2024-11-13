@@ -5,7 +5,7 @@ package Recursividad;
 
 import java.util.Scanner;
 
-public class EJ_4 {
+public class EJ4 {
     public static void menu() {
         try (Scanner sc = new Scanner(System.in)) {
             System.out.println("Ingrese el numero para conteo regresivo");

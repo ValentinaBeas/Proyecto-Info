@@ -1,7 +1,7 @@
 //Escriba un método recursivo que imprima los elementos de un arreglo en orden inverso.
 
 package Recursividad;
-public class EJ_6 {
+public class EJ6 {
     public static void menu() {
         int array [] = {4, 2, 7, 1, 9};
         System.out.println("***ARREGLO NORMAL***");

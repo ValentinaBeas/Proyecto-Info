@@ -5,7 +5,7 @@ package Recursividad;
 
 import java.util.Scanner;
 
-public class EJ_1 {
+public class EJ1 {
     public static void menu() {
         try (Scanner sc = new Scanner(System.in)) {
             System.out.println("Ingrese el numero del cual quiere saber su factorial");

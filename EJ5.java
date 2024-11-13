@@ -2,7 +2,7 @@ package Recursividad;
 
 import java.util.Scanner;
 
-public class EJ_5 {
+public class EJ5 {
     public static void menu() {
         try (Scanner sc = new Scanner(System.in)) {
             System.out.println("Ingrese 2 numeros para multiplicarlos:\nIngrese A:");

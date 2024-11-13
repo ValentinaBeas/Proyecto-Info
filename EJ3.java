@@ -5,7 +5,7 @@ package Recursividad;
 
 import java.util.Scanner;
 
-public class EJ_3 {
+public class EJ3 {
     public static void menu() {
         try (Scanner sc = new Scanner(System.in)) {
             System.out.println("ingrese la base");
